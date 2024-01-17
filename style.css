@@ -219,7 +219,7 @@ body {
 }
 
 #product1 .pro {
-    width: 25%;
+    width: 22%;
     min-width: 300px;
     padding: 10px 15px;
     border: 1px solid #7a259c;
@@ -370,10 +370,10 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-width: 580px;
+    min-width: 50%; /* Ustawienie szerokości na 50% (czyli połowę szerokości rodzica) */
     height: 50vh;
     overflow: hidden;
-    /* Dodaj tę linię, aby obciąć nadmiarowy obraz */
+    margin-bottom: 30px; /* Dodane odstępy między bannerami */
 }
 
 #sm-banner .banner-box::before {
@@ -388,24 +388,33 @@ body {
     background-position: center;
     z-index: -1;
 }
-#sm-banner .banner-box2{
+
+#sm-banner .banner-box2 {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b10.jpg);
+    min-width: 50%; /* Ustawienie szerokości na 50% (czyli połowę szerokości rodzica) */
+    height: 50vh;
+    overflow: hidden;
+    margin-bottom: 30px; /* Dodane odstępy między bannerami */
+}
+
+#sm-banner h4,
+#sm-banner h2,
+#sm-banner span,
+button.white {
+    color: white;
 }
 
 #sm-banner h4 {
-    color: white;
     font-size: 20px;
     font-weight: 300;
 }
 
 #sm-banner h2 {
-    color: white;
     font-size: 28px;
     font-weight: 800;
 }
 
 #sm-banner span {
-    color: rgb(255, 255, 255);
     font-size: 14px;
     font-weight: 500;
     padding-bottom: 15px;
@@ -415,7 +424,6 @@ button.white {
     font-size: 14;
     font-weight: 600;
     padding: 15px 30px;
-    color: rgb(255, 255, 255);
     background-color: rgb(255, 103, 209);
     border-radius: 4px;
     cursor: pointer;
@@ -423,8 +431,147 @@ button.white {
     border: none;
     transition: 0.2s;
 }
-#sm-banner .banner-box:hover button{
+
+#sm-banner .banner-box:hover button {
     background: white;
-    color:  rgb(255, 103, 209);
-    border: 1px solid  rgb(255, 103, 209);
+    color: rgb(255, 103, 209);
+    border: 1px solid rgb(255, 103, 209);
+}
+#banner3 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 80px;
+}
+
+#banner3 .banner-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: flex-start;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b7.jpg);
+    min-width: 30%; /* Ustawienie szerokości na 30% (czyli połowę szerokości rodzica) */
+    height: 30vh;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px; /* Dodane odstępy między bannerami */
+    padding: 20px;
+}
+
+#banner3 h3{
+    color: pink;
+    font-weight: 800;
+    font-size: 15px;
+}
+#banner3 h2{
+    color:rgb(255, 255, 255);
+    font-weight: 800;
+    font-size: 30px;
+}
+#banner3 .banner-box2{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b4.jpg);
+}
+#banner3 .banner-box3{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b18.jpg);
+}
+
+#newsletter{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b14.png);
+    background-repeat: repeat;
+    background-position: 20% 1%;
+    background-color: #000;
+}
+#newsletter h4{
+    color: white;
+    font-weight: 600;
+    font-size: 30px;
+}
+#newsletter p{
+    color: white;
+    font-weight: 300;
+    font-size: 15px;
+}
+#newsletter span{
+    color: rgb(236, 125, 218);
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: underline;
+}
+#newsletter input{
+    height: 3.125rem;
+    padding: 0 1.25em;
+    font-size: 15px;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    outline: none;
+}
+#newsletter button{
+    background: #ce1d84;
+    color: white;
+    margin-top: 10px;
+}
+#newsletter button:hover {
+    background: white;
+    color: #ce1d84;
+}
+#newsletter .form{
+    width: 40%;
+}
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.col {
+    flex: 0 0 calc(25% - 20px); /* Ustaw szerokość dla jednej kolumny (1/4) z odstępem */
+    margin-bottom: 20px;
+    
+}
+
+.copywrite {
+    flex-basis: 100%;
+    text-align: center; /* Ustaw szerokość dla pełnej szerokości w ostatniej kolumnie */
+}
+footer .logo{
+    margin-bottom: 30px;
+}
+footer h4{
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+footer p{
+    font-size: 12px;
+    margin: 0 0 8px 0;
+}
+footer a {
+    font-size: 13px;
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 10px;
+    position: relative;
+    transition: color 0.3s; /* Dodaj efekt przejścia koloru */
+
+}
+footer .follow{
+    margin-top: 20px;
+}
+footer .follow i{
+    color: #000000;
+    padding-right: 4px;
+    cursor: pointer;
+    transition: color 0.3s; /* Dodaj efekt przejścia koloru */
+}
+footer .follow i:hover{
+    color: #ce1d84;
+}
+footer a:hover{
+    color: #ce1d84;
 }
