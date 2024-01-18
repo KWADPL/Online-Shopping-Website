@@ -86,6 +86,16 @@ body {
     position: relative;
 }
 
+#mobile {
+    display: none;
+    align-items: center;
+}
+
+#close {
+    display: none;
+}
+
+
 #navbar li a {
     text-decoration: none;
     font-size: 16px;
@@ -370,10 +380,12 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-width: 50%; /* Ustawienie szerokości na 50% (czyli połowę szerokości rodzica) */
+    min-width: 50%;
+    /* Ustawienie szerokości na 50% (czyli połowę szerokości rodzica) */
     height: 50vh;
     overflow: hidden;
-    margin-bottom: 30px; /* Dodane odstępy między bannerami */
+    margin-bottom: 30px;
+    /* Dodane odstępy między bannerami */
 }
 
 #sm-banner .banner-box::before {
@@ -391,10 +403,12 @@ body {
 
 #sm-banner .banner-box2 {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b10.jpg);
-    min-width: 50%; /* Ustawienie szerokości na 50% (czyli połowę szerokości rodzica) */
+    min-width: 50%;
+    /* Ustawienie szerokości na 50% (czyli połowę szerokości rodzica) */
     height: 50vh;
     overflow: hidden;
-    margin-bottom: 30px; /* Dodane odstępy między bannerami */
+    margin-bottom: 30px;
+    /* Dodane odstępy między bannerami */
 }
 
 #sm-banner h4,
@@ -437,6 +451,7 @@ button.white {
     color: rgb(255, 103, 209);
     border: 1px solid rgb(255, 103, 209);
 }
+
 #banner3 {
     display: flex;
     justify-content: space-between;
@@ -451,58 +466,67 @@ button.white {
     align-items: center;
     text-align: flex-start;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b7.jpg);
-    min-width: 30%; /* Ustawienie szerokości na 30% (czyli połowę szerokości rodzica) */
+    min-width: 30%;
+    /* Ustawienie szerokości na 30% (czyli połowę szerokości rodzica) */
     height: 30vh;
     background-size: cover;
     background-position: center;
-    margin-bottom: 20px; /* Dodane odstępy między bannerami */
+    margin-bottom: 20px;
+    /* Dodane odstępy między bannerami */
     padding: 20px;
 }
 
-#banner3 h3{
+#banner3 h3 {
     color: pink;
     font-weight: 800;
     font-size: 15px;
 }
-#banner3 h2{
-    color:rgb(255, 255, 255);
+
+#banner3 h2 {
+    color: rgb(255, 255, 255);
     font-weight: 800;
     font-size: 30px;
 }
-#banner3 .banner-box2{
+
+#banner3 .banner-box2 {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b4.jpg);
 }
-#banner3 .banner-box3{
+
+#banner3 .banner-box3 {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b18.jpg);
 }
 
-#newsletter{
+#newsletter {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b14.png);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b14.png);
     background-repeat: repeat;
     background-position: 20% 1%;
     background-color: #000;
 }
-#newsletter h4{
+
+#newsletter h4 {
     color: white;
     font-weight: 600;
     font-size: 30px;
 }
-#newsletter p{
+
+#newsletter p {
     color: white;
     font-weight: 300;
     font-size: 15px;
 }
-#newsletter span{
+
+#newsletter span {
     color: rgb(236, 125, 218);
     font-weight: 800;
     font-size: 15px;
     text-decoration: underline;
 }
-#newsletter input{
+
+#newsletter input {
     height: 3.125rem;
     padding: 0 1.25em;
     font-size: 15px;
@@ -511,16 +535,19 @@ button.white {
     border-radius: 30px;
     outline: none;
 }
-#newsletter button{
+
+#newsletter button {
     background: #ce1d84;
     color: white;
     margin-top: 10px;
 }
+
 #newsletter button:hover {
     background: white;
     color: #ce1d84;
 }
-#newsletter .form{
+
+#newsletter .form {
     width: 40%;
 }
 
@@ -531,47 +558,188 @@ footer {
 }
 
 .col {
-    flex: 0 0 calc(25% - 20px); /* Ustaw szerokość dla jednej kolumny (1/4) z odstępem */
+    flex: 0 0 calc(25% - 20px);
+    /* Ustaw szerokość dla jednej kolumny (1/4) z odstępem */
     margin-bottom: 20px;
-    
+
 }
 
 .copywrite {
     flex-basis: 100%;
-    text-align: center; /* Ustaw szerokość dla pełnej szerokości w ostatniej kolumnie */
+    text-align: center;
+    /* Ustaw szerokość dla pełnej szerokości w ostatniej kolumnie */
 }
-footer .logo{
+
+footer .logo {
     margin-bottom: 30px;
 }
-footer h4{
+
+footer h4 {
     font-size: 14px;
     padding-bottom: 20px;
 }
-footer p{
+
+footer p {
     font-size: 12px;
     margin: 0 0 8px 0;
 }
+
 footer a {
     font-size: 13px;
     text-decoration: none;
     color: #000;
     margin-bottom: 10px;
     position: relative;
-    transition: color 0.3s; /* Dodaj efekt przejścia koloru */
+    transition: color 0.3s;
+    /* Dodaj efekt przejścia koloru */
 
 }
-footer .follow{
+
+footer .follow {
     margin-top: 20px;
 }
-footer .follow i{
+
+footer .follow i {
     color: #000000;
     padding-right: 4px;
     cursor: pointer;
-    transition: color 0.3s; /* Dodaj efekt przejścia koloru */
+    transition: color 0.3s;
+    /* Dodaj efekt przejścia koloru */
 }
-footer .follow i:hover{
+
+footer .follow i:hover {
     color: #ce1d84;
 }
-footer a:hover{
+
+footer a:hover {
     color: #ce1d84;
+}
+
+@media (max-width:799px) {
+    .section-p1 {
+        padding: 40px 80px;
+    }
+
+    #navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        height: 100vh;
+        width: 300px;
+        background: url(img/navbarmobile.jpg);
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.06);
+        padding: 80px 0 0 10px;
+        transition: right 0.2s ease;
+    }
+
+    #navbar.active {
+        right: 0px;
+        transition: right 0.2s ease;
+        /* To ustawia szybkość przejścia */
+
+    }
+
+    #navbar li {
+        margin-bottom: 25px;
+    }
+
+    #mobile {
+        display: flex;
+        align-items: center;
+    }
+
+    #mobile i {
+        color: #000;
+        font-size: 24px;
+        padding: -50px;
+        margin-left: 30px;
+    }
+
+    #close {
+        display: initial;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        color: black;
+        font-size: 24px;
+        cursor: pointer;
+        transition: right 0.2s;
+    }
+
+    #lg-bag {
+        display: none;
+    }
+
+    #feature {
+        justify-content: center;
+
+    }
+
+    #feature .fe-box {
+        margin: 15px 15px;
+    }
+
+    #product1 .pro-container {
+        justify-content: center;
+    }
+
+    #product1.pro {
+        margin: 15px;
+    }
+    #banner {
+        height: 30vh;
+    }
+    #sm-banner .banner-box{
+        min-width: 100%;
+        height: 100vh;
+        padding: 30px;
+    }
+    #banner3{
+        padding: 0 40px;
+    }
+  #newsletter .form{
+    width: 95%;
+  }
+
+}
+@media (max-width: 477px) {
+    .section-p1{
+        padding: 20px;
+    }
+    #header{
+        padding: 10px 30px;
+    }
+    h4{
+        margin-top: 20px;
+    }
+    h1{
+        font-size: 38px;
+    }
+    h2{
+        font-size: 32px;
+    }
+    #hero{
+        padding: 0px 20px;
+        background-position: 55%;
+    }
+    #feature{
+        justify-content: space-between;
+    }
+    #feature .fe-box{
+        width: 155px;
+        margin: 0 0 15px 0;
+    }
+    #product .pro{
+        width: 100%;
+    }
+    #banner{
+        height: 40vh;
+    }
+    footer.copyright{
+        text-align: start;
+    }
 }
