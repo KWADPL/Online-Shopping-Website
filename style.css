@@ -72,12 +72,23 @@ body {
     position: sticky;
     top: 0;
     left: 0;
+    transition: background-color 0.3s ease;
+    transition: opacity 0.3s ease; /* Dodane przejście dla płynniejszego efektu */
+}
+
+#header.transparent {
+    background-color: rgba(255, 255, 255, 0); /* Transparent background color when scrolling down */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Ensure the header stays on top of other elements */
 }
 
 #navbar {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.3s ease; /* Dodane przejście dla płynniejszego efektu */
 }
 
 #navbar li {
@@ -85,7 +96,9 @@ body {
     padding: 0 20px;
     position: relative;
 }
-
+#navbar.transparent {
+    background-color: rgba(255, 255, 255, 0); /* Transparent background color when scrolling down */
+}
 #mobile {
     display: none;
     align-items: center;
@@ -104,8 +117,9 @@ body {
     transition: 0.3s ease;
 }
 
-#navbar li a:hover,
-#navbar li a.active {
+
+#navbar li a.active,
+#navbar li a:hover {
     color: blueviolet;
 }
 
@@ -118,7 +132,6 @@ body {
     position: absolute;
     bottom: -4px;
     left: 20px;
-
 }
 
 #hero {
@@ -775,7 +788,102 @@ footer a:hover {
     font-size: 16px;
     font-weight: 600;
 }
+#description .single-image{
+    width: 40%;
+    margin-right: 50px;
+}
+.small-img-group{
+    display: flex;
+    justify-content: space-between;
+}
 
+.small-img-col{
+    flex-basis: 24%;
+    cursor: pointer;
+}
+#description .details{
+    width: 50%;
+}
+#description{
+    display: flex;
+    margin: top 20px;
+}
+#description .details h4{
+    padding: 40px 0 20px 0;
+}
+#description .details h2{
+    font-size: 26px;
+}
+#description .details select{
+display: block;
+padding: 5px 10px;
+margin-bottom: 10px;
+}
+#description .details input{
+    width: 50px;
+    height: 47px;
+    padding-left: 10px;
+    margin-right: 10px;
+}#description .details span{
+    line-height: 25px;
+}
+.product-notes {
+    font-style: italic;
+    color: #888;
+    padding: 10px;
+}
+.product-reviews {
+    margin-top: 20px;
+}
+
+.product-reviews h3 {
+    color: #333;
+}
+
+.product-reviews ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.product-reviews li {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.product-reviews li strong {
+    display: block;
+    color: #555;
+}
+
+.product-reviews li span {
+    color: #777;
+}
+.star-icon {
+    display: flex;  /* Ustawienie kontenera na flexbox */
+}
+
+.star-icon i {
+    margin-right: 5px;  /* Odstęp między gwiazdkami */
+    cursor: pointer;
+    color:#000;
+}
+
+.star-icon i:hover {
+    background: linear-gradient(to left, gold 100%, black 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.form-review button:hover{
+        background: white;
+        color: #ce1d84;
+}
+
+.details button:hover{
+    background: white;
+    color: #ce1d84;
+}
 
 @media (max-width: 477px) {
     .section-p1{
@@ -816,48 +924,30 @@ footer a:hover {
     #banner3 .banner-box {
         width: 100%; /* Ustawienie szerokości na 100% rodzica */
     }
-}
-#description .single-image{
-    width: 40%;
-    margin-right: 50px;
-}
-.small-img-group{
-    display: flex;
-    justify-content: space-between;
+    #description {
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    #description .single-image {
+        width: 100%;
+        margin-right: 0; /* Resetowanie marginesu */
+    }
+
+    #description .details {
+        width: 100%;
+        margin-top: 20px;
+       
+    }
 }
 
-.small-img-col{
-    flex-basis: 24%;
-    cursor: pointer;
-}
-#description .details{
-    width: 50%;
-}
-#description{
-    display: flex;
-    margin: top 20px;
-}
-#description .details h4{
-    padding: 40px 0 20px 0;
-}
-#description .details h2{
-    font-size: 26px;
-}
-#description .details select{
-display: block;
-padding: 5px 10px;
-margin-bottom: 10px;
-}
-#description .details input{
-    width: 50px;
-    height: 47px;
-    padding-left: 10px;
-    margin-right: 10px;
-}#description .details span{
-    line-height: 25px;
-}.product-notes {
+
+
+.product-notes {
     font-style: italic;
     color: #888;
+    padding: 10px;
 }
 .product-reviews {
     margin-top: 20px;
@@ -869,7 +959,7 @@ margin-bottom: 10px;
 
 .product-reviews ul {
     list-style: none;
-    padding: 0;
+    padding: 10px;
 }
 
 .product-reviews li {
@@ -893,7 +983,7 @@ margin-bottom: 10px;
 .star-icon i {
     margin-right: 5px;  /* Odstęp między gwiazdkami */
     cursor: pointer;
-    color:#000
+    color:#000;
 }
 
 .star-icon i:hover {

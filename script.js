@@ -1,42 +1,64 @@
-const bar = document.getElementById('bar');
-const close = document.getElementById('close');
-const nav = document.getElementById('navbar');
+var MainImg;
+var smallimg;
 
-if (bar) {
-    bar.addEventListener('click', () => {
-        nav.classList.add('active')
-    })
-}
+document.addEventListener('DOMContentLoaded', function() {
+    MainImg = document.getElementById("MainImg");
+    smallimg = document.getElementsByClassName("small-img");
 
-if(close) {
-    close.addEventListener('click', () => {
-        nav.classList.remove('active')
-    })
-}
-var MainImg = document.getElementById("MainImg")
-var smallimg = document.getElementsByClassName("small-img")
-
-smallimg[0].onclick = function(){
-    MainImg.src = smallimg[0].src;
-}
-smallimg[1].onclick = function(){
-    MainImg.src = smallimg[1].src;
-}
-smallimg[2].onclick = function(){
-    MainImg.src = smallimg[2].src;
-}
-smallimg[3].onclick = function(){
-    MainImg.src = smallimg[3].src;
-}
-function rateProduct(selectedStars, groupId) {
-    const stars = document.querySelectorAll(`#${groupId} i`);
-
-    for (let i = 0; i < stars.length; i++) {
-        if (i < selectedStars) {
-            stars[i].style.color = 'gold';
-        } else {
-            stars[i].style.color = 'black';
+    if (smallimg.length > 0) {
+        smallimg[0].onclick = function(){
+            MainImg.src = smallimg[0].src;
         }
     }
-}
 
+    if (smallimg.length > 1) {
+        smallimg[1].onclick = function(){
+            MainImg.src = smallimg[1].src;
+        }
+    }
+
+    if (smallimg.length > 2) {
+        smallimg[2].onclick = function(){
+            MainImg.src = smallimg[2].src;
+        }
+    }
+
+    if (smallimg.length > 3) {
+        smallimg[3].onclick = function(){
+            MainImg.src = smallimg[3].src;
+        }
+    }
+
+    const bar = document.getElementById('bar');
+    const close = document.getElementById('close');
+    const nav = document.getElementById('navbar');
+
+    if (bar) {
+        bar.addEventListener('click', () => {
+            nav.classList.add('active');
+        });
+    }
+
+    if (close) {
+        close.addEventListener('click', () => {
+            nav.classList.remove('active');
+        });
+    }
+    let prevScrollPos = window.pageYOffset;
+
+    window.onscroll = function() {
+        let currentScrollPos = window.pageYOffset;
+        let header = document.getElementById("header");
+        let navbar = document.getElementById("navbar");
+
+        if (prevScrollPos > currentScrollPos) {
+            header.style.opacity = "1";
+            navbar.style.opacity = "1";
+        } else {
+            header.style.opacity = "0";
+            navbar.style.opacity = "0";
+        }
+
+        prevScrollPos = currentScrollPos;
+    };
+});
