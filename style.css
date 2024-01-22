@@ -931,7 +931,7 @@ footer a:hover {
 }
 
 #page-header.blog-header{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/banner/b21.png);
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),git url(img/banner/b21.png);
 }
 #page-header p{
     color: rgb(255, 255, 255);
@@ -965,6 +965,95 @@ footer a:hover {
 .blog-details button:hover {
     background: white;
     color: #ce1d84;
+}
+
+
+.animated-text-wrapper .animated-text li {
+    animation: slide 28s steps(14) infinite;
+    color: #c557c0;
+    font-size: 23px;
+    line-height: 36px;
+    list-style: none;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0
+}
+
+.animated-text-wrapper .animated-text li span {
+    font-weight: 700;
+    position: relative;
+}
+
+.animated-text-wrapper .animated-text li span:after {
+    animation: typing 2s steps(25) infinite;
+    background-color: #ffe0fb;
+    border-left: 3px solid #c557c0;
+    content: "";
+    height: 120%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+
+.animated-text-wrapper .animated-text {
+    height: 36px;
+    overflow: hidden;
+}
+.animated-text-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes typing {
+    0% {
+        left: 0
+    }
+
+    75% {
+        left: 100%
+    }
+
+    to {
+        left: 100%
+    }
+}
+
+@keyframes slide {
+    to {
+        top: -504px
+    }
+}
+
+.details-box {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffe0fb;
+    background-image: url('img/background-pattern (1).png'); /* Poprawiona ścieżka do obrazu */
+    padding: 100px 0;
+    width: 100%;
+    margin: -100px -20px -20px; /* Ustawienie marginesu ujemnego, aby przenieść element w górę */
+    text-align: center;
+    position: relative;
+}
+
+#about-app{
+    text-align: center;
+}
+#about-app .video{
+    width: 50%;
+    height: 100%;
+    margin: 30px auto 0 auto;
+}
+#about-app .video video{
+    width: 100%;
+    height: 100%;
+}
+
+#page-header h2{
+    color: #ffe0fb;
 }
 
 @media (max-width:1024px) {
@@ -1105,6 +1194,20 @@ footer a:hover {
     }
 
 }
+#page-header.about-header{
+    background: url("img/about/banner.png.avif");
+}
+
+
+
+@keyframes typing1 {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
 
 
 @media (max-width: 477px) {
@@ -1195,6 +1298,17 @@ footer a:hover {
     #blog .blog-details{
         width: 100%;
     }
+    .details-box {
+    align-items: center;
+    display: flex;
+    background-color: #ffe0fb;
+    background-image: url('img/background-pattern (1).png'); /* Poprawiona ścieżka do obrazu */
+    padding: 100px 0 ;
+    width: 112%;
+    margin: -100px -20px -20px; /* Ustawienie marginesu ujemnego, aby przenieść element w górę */
+    text-align: center;
+    position: relative;
+}
  }
 
 

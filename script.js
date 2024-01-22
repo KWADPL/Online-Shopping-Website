@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.classList.remove('active');
         });
     }
+
     let prevScrollPos = window.pageYOffset;
 
     window.onscroll = function() {
