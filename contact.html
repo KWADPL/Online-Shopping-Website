@@ -9,6 +9,8 @@
     <title> Project Fleur </title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css" />
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 </head>
 
@@ -49,13 +51,17 @@
                 Nr KRS 0000000732</p>
             <h6>E-Shop hotline and e-mail adress</h6>
             <p>The store's hotline operates 24 hours a day, seven days a week.
-                We recommend contacting us via e-mail for marketing/business purposes:</p><a href="mailto:wadeckakarolina@gmail.com"><p>wadeckakarolina@gmail.com</p></a>
+                We recommend contacting us via e-mail for marketing/business purposes:</p><a
+                href="mailto:wadeckakarolina@gmail.com">
+                <p>wadeckakarolina@gmail.com</p>
+            </a>
             <div class="contact-info">
                 <a href="https://github.com/KarolinaWadecka/Online-Shopping-Website">
                     <span>+48 123 45 67 (call cost according to the operator's tariff)</span>
                 </a>
                 <p>Providing data is voluntary, but lack of consent prevents us from contacting you. The rules for
-                    processing your data can be found in</p><a href="https://uodo.gov.pl/pl/404/224"><span>PRIVACY POLICY!</span></a>
+                    processing your data can be found in</p><a href="https://uodo.gov.pl/pl/404/224"><span>PRIVACY
+                        POLICY!</span></a>
             </div>
         </div>
         <div class="map">
@@ -67,20 +73,27 @@
     </section>
 
     <section id="contact-form">
-        <form action="">
+        <form action="/submit" method="post" id="myForm">
             <span>LEAVE A MESSAGE</span>
             <p>Write your suggestion!</p>
-            <input type="text">
-            <input type="text">
-            <input type="text">
-            <select>
-                <option>XSS</option>
-                <option>XS</option>
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
+            <p>Name</p>
+            <input type="text" name="name"> 
+            <p>Surname</p>
+            <input type="text" name="surname"> 
+            <p>E-mail address</p>
+            <input type="text" name="email"> 
+            <p>Select department!</p>
+            <select name="department"> 
+                <option>Online Shop</option>
+                <option>Stationary local</option>
+                <option>Marketing/HR department</option>
+                <option>Our lawyers</option>
             </select>
+            <p>Your message</p>
+            <textarea name="message" id="" cols="30" rows="10" placeholder="Write here your text"></textarea>
+            <br/>
+            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+            <button type="button" onclick="handleFormSubmit()">Submit</button>
         </form>
     </section>
 

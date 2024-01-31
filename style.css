@@ -1130,6 +1130,10 @@ a:-webkit-any-link {
     }
 }
 
+.g-recaptcha {
+    margin-top: 10px;
+}
+
 @media (max-width:1024px) {
     .section-p1 {
         padding: 40px 80px;

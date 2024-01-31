@@ -63,3 +63,13 @@ document.addEventListener('DOMContentLoaded', function() {
         prevScrollPos = currentScrollPos;
     };
 });
+function handleFormSubmit() {
+    var response = grecaptcha.getResponse();
+
+    if (response.length === 0) {
+        alert("Please complete the reCAPTCHA challenge.");
+    } else {
+        var myForm = document.getElementById('myForm');
+        myForm.submit();
+    }
+}
