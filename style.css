@@ -1096,7 +1096,6 @@ footer a:hover {
     margin-bottom: 15px;
 }
 
-/* Dodatkowe style dla linków */
 .contact-info a span {
     font-weight: bold;
     color:#ce1d84;
@@ -1120,6 +1119,11 @@ a:-webkit-any-link {
 #page-header.about-header {
     background: url("img/about/banner.png.avif");
 }
+#page-header.contact-header{
+    background: url("img/banner/header.png");
+    background-size: cover;
+    background-position-Y: 20%;
+}
 @keyframes typing1 {
     from {
         width: 0;
@@ -1129,16 +1133,111 @@ a:-webkit-any-link {
         width: 100%;
     }
 }
-
-.g-recaptcha {
-    margin-top: 10px;
+#contact-form {
+    position: relative;
 }
 
-@media (max-width:1024px) {
-    .section-p1 {
-        padding: 40px 80px;
+.form-container {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+}
+
+#contactIcon button {
+    background-color: #ffc3ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+#myForm {
+    max-width: 100%;
+    margin: 50px auto 0;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    z-index: 4;
+}
+
+#myForm button {
+    width: 100%;
+    background-color: #ffc3ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#myForm input,
+#myForm select,
+#myForm textarea {
+    width: calc(100% - 50px);
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #555;
+}
+
+.g-recaptcha {
+    margin: 10px 0;
+}
+
+#myForm p {
+    color: #000;
+}
+
+@media screen and (min-width: 768px) {
+    #contactIcon {
+        display: none; /* Ukryj przycisk na urządzeniach stacjonarnych */
     }
 
+    #contactFormContainer {
+        display: block !important; /* Wyświetl formularz na urządzeniach stacjonarnych */
+    }
+}
+
+/* Styl dla urządzeń mobilnych */
+@media screen and (max-width: 767px) {
+    #contactFormContainer {
+        display: none; /* Ukryj formularz na początku na urządzeniach mobilnych */
+    }
+
+    #myForm {
+        max-width: 100%; /* Przykładowa szerokość formularza na urządzeniach mobilnych */
+        margin: 50px auto; /* Przykładowe marginesy */
+        padding: 20px; /* Przykładowy padding */
+        font-size: 16px; /* Przykładowa wielkość czcionki */
+        /* Dodaj inne style według potrzeb */
+    }
+
+    #contactIcon button {
+        background-color: #ffc3ff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 767px) {
     #navbar {
         display: flex;
         flex-direction: column;
@@ -1289,7 +1388,9 @@ a:-webkit-any-link {
         width: 100%;
         height: 200px;
     }
+
 }
+
 
 
 @media (max-width: 477px) {
@@ -1414,4 +1515,6 @@ a:-webkit-any-link {
         width: 100%;
         height: 200px;
     }
+    
+
 }

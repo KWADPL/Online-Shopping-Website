@@ -4,12 +4,11 @@ const path = require('path');
 
 const PORT = 8080;
 
-const publicPath = path.join(__dirname);
 
-app.use(express.static(publicPath));
+app.use(express.static(__dirname));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
