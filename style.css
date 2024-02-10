@@ -334,6 +334,7 @@ body {
     text-align: center;
 }
 
+
 .product-price {
     padding-top: 7px;
     font-size: 15px;
@@ -1203,39 +1204,182 @@ a:-webkit-any-link {
     color: #000;
 }
 
+#cart table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    white-space: nowrap;
+}
+#cart table img{
+    width: 70px;
+}
+
+#cart table td:nth-child(1){
+    width: 100px;
+    text-align: center;
+}
+#cart table td:nth-child(2){
+    width: 150px;
+    text-align: center;
+}
+#cart table td:nth-child(3){
+    width: 250px;
+    text-align: center;
+}
+#cart table td:nth-child(4),
+#cart table td:nth-child(5),
+#cart table td:nth-child(6){
+    width: 150px;
+    text-align: center;
+}
+#cart table thead{
+    border: 1px solid pink;
+    border-left: none;
+    border-right: none;
+}
+#cart table thead td{
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 18px;
+}
+#cart table td:nth-child(5) input{
+    width: 70px;
+    padding: 10px 5px 10px 15px;
+}
+#cart table tbody tr td{
+    padding-top: 15px;
+}
+#cart table tbody td{
+    font-size: 13px;
+}
+#cart-add{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#coupon {
+    max-width: 600px; 
+    padding: 20px; 
+}
+
+#coupon h3 {
+    margin-bottom: 15px; 
+}
+
+#coupon input {
+    padding: 10px;
+    outline: none;
+    width: 70%;
+    margin-right: 10px;
+    border: 1px solid pink;
+    display: inline-block;
+    box-sizing: border-box; 
+}
+
+#coupon button {
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    display: inline-block;
+    background-color: #ff69b4; 
+    color: #fff; 
+    cursor: pointer;
+}
+
+#coupon button:hover {
+    background-color: white;
+    color: #ff69b4; 
+}
+
+#Subtotal{
+    width: 50%;
+    margin-bottom: 30px;
+    border: 1px solid pink;
+    padding: 30px;
+    box-sizing: border-box;
+}
+#Subtotal table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+#Subtotal table td{
+    width: 100%;
+    border: 1px solid pink;
+    padding: 10px;
+    font-size: 13px;
+}
+#Subtotal h3{
+     margin-bottom: 15px;
+}
+
+#Subtotal button {
+    display: inline-block;
+    background-color: #ff69b4; 
+    color: #fff; 
+    cursor: pointer;
+}
+
+#Subtotal button:hover {
+    background-color: white;
+    color: #ff69b4; /* Kolor tła dla efektu hover */
+}
+
+#cart{
+    overflow-x:auto;
+}
+
 @media screen and (min-width: 768px) {
     #contactIcon {
-        display: none; /* Ukryj przycisk na urządzeniach stacjonarnych */
+        display: none; 
     }
 
     #contactFormContainer {
-        display: block !important; /* Wyświetl formularz na urządzeniach stacjonarnych */
+        display: block !important; 
     }
 }
 
-/* Styl dla urządzeń mobilnych */
 @media screen and (max-width: 767px) {
-    #contactFormContainer {
-        display: none; /* Ukryj formularz na początku na urządzeniach mobilnych */
+    #Subtotal{
+        width: 100%;
+        margin-bottom: 30px;
+        border: 1px solid pink;
+        padding: 30px;
+        box-sizing: border-box;
     }
 
+
+    #cart-add{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    #contactFormContainer {
+        display: none; 
+    }
+
+
     #myForm {
-        max-width: 100%; /* Przykładowa szerokość formularza na urządzeniach mobilnych */
-        margin: 50px auto; /* Przykładowe marginesy */
-        padding: 20px; /* Przykładowy padding */
-        font-size: 16px; /* Przykładowa wielkość czcionki */
-        /* Dodaj inne style według potrzeb */
+        max-width: 100%; 
+        margin: 50px auto; 
+        padding: 20px;
+        font-size: 16px;
+        
     }
 
     #contactIcon button {
         background-color: #ffc3ff;
         color: white;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
 }
+
 
 @media screen and (max-width: 767px) {
     #navbar {
@@ -1360,7 +1504,6 @@ a:-webkit-any-link {
     #description .single-image {
         width: 100%;
         margin-right: 0;
-        /* Resetowanie marginesu */
     }
 
     #description .details {
@@ -1454,7 +1597,6 @@ a:-webkit-any-link {
     #description .single-image {
         width: 100%;
         margin-right: 0;
-        /* Resetowanie marginesu */
     }
 
     #description .details {
@@ -1490,11 +1632,9 @@ a:-webkit-any-link {
         display: flex;
         background-color: #ffe0fb;
         background-image: url('img/background-pattern (1).png');
-        /* Poprawiona ścieżka do obrazu */
         padding: 100px 0;
         width: 112%;
         margin: -100px -20px -20px;
-        /* Ustawienie marginesu ujemnego, aby przenieść element w górę */
         text-align: center;
         position: relative;
     }
