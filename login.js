@@ -11,14 +11,3 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-//   async function fetchProfileData() {
-//     try {
-//         console.log('Fetching profile data');
-//         const response = await fetch('/profile-data');
-//         const data = await response.json();
-
-//         document.getElementById('username').textContent = data.username;
-//     } catch (error) {
-//         console.error('Error fetching profile data:', error);
-//     }
-// } 

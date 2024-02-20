@@ -118,6 +118,13 @@ app.get('/profile.html', (req, res) => {
   // Pobranie parametru z adresu URL
   const loginSuccessful = req.query['login-successful'];
 
+  // Sprawdzenie, czy użytkownik jest zalogowany
+  const userId = req.session.userId;
+  if (!userId) {
+    // Jeśli użytkownik nie jest zalogowany, przekieruj na stronę logowania
+    return res.redirect('/login');
+  }
+
   // Wyświetlenie powiadomienia na stronie
   res.sendFile(path.join(__dirname, 'Profile.html'));
 });
@@ -156,7 +163,6 @@ app.get('/profile-data', async (req, res) => {
 app.use((req, res) => {
   res.status(404).send('404 - Not Found');
 });
-
 // Nasłuchiwanie na określonym porcie
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
