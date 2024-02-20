@@ -1,3 +1,4 @@
+// Importowanie modułów
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -8,15 +9,14 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const PORT = 8080;
 
-// Middleware
+// Konfiguracja
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 app.use(session({ secret: 'your-secret-random-long-secret-key-1234', resave: true, saveUninitialized: true }));
 
-// MongoDB Connection
 mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// User Schema
+// Schemat użytkownika
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
@@ -25,90 +25,139 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// Registration Page
+// Trasy
+
+// Rejestracja
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'SignIn.html'));
 });
 
-// Handle Registration Requests
 app.post('/register', async (req, res) => {
   try {
     const { username, password, email, gRecaptchaResponse } = req.body;
 
-    // Verify reCAPTCHA
+    // Weryfikacja reCAPTCHA
     const recaptchaSecretKey = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
     const recaptchaVerificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${gRecaptchaResponse}`;
-    
+
     const recaptchaResponse = await axios.post(recaptchaVerificationURL);
     const recaptchaData = recaptchaResponse.data;
 
     if (!recaptchaData.success) {
-      return res.send('<script>alert("reCAPTCHA verification failed. Fill all fields correctly and verify yourself!"); window.location.href = "/register";</script>');
+      return res.status(400).send('reCAPTCHA verification failed. Fill all fields correctly and verify yourself!');
     }
 
-    // Add validation
+    // Walidacja pól
     if (!username || !password || !email) {
-      return res.send('<script>alert("All fields are required."); window.location.href = "/register";</script>');
+      return res.status(400).send('All fields are required.');
     }
 
-    // Hash the password
+    // Haszowanie hasła i zapis do bazy danych
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create a new User
     const newUser = new User({
       username,
       password: hashedPassword,
       email
     });
 
-    // Save the user to the database
     await newUser.save();
 
-    res.send('<script>alert("Registration completed successfully. You can log in now."); window.location.href = "/login";</script>');
-  } catch (err) {
+    console.log('Registration successful. Redirecting to login page.');
+    res.redirect('/login?alert=registration-successful');
+} catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error: Registration failed.');
-  }
+}
 });
 
-// Login Page
+
+// Logowanie
 app.get('/login', (req, res) => {
+  // Pobranie parametru z adresu URL
+  const registrationSuccessful = req.query['registration-successful'];
+
+  // Wyświetlenie powiadomienia na stronie
   res.sendFile(path.join(__dirname, 'LogIn.html'));
 });
 
-// Handle Login Requests
 app.post('/login', async (req, res) => {
   try {
     const { username, password, gRecaptchaResponse } = req.body;
 
-    // Verify reCAPTCHA
+    // Weryfikacja reCAPTCHA
     const recaptchaSecretKey = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
     const recaptchaVerificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${gRecaptchaResponse}`;
-    
+
     const recaptchaResponse = await axios.post(recaptchaVerificationURL);
     const recaptchaData = recaptchaResponse.data;
 
     if (!recaptchaData.success) {
-      return res.send('<script>alert("reCAPTCHA verification failed. Fill all fields correctly and verify yourself!"); window.location.href = "/login";</script>');
+      return res.status(400).send('reCAPTCHA verification failed. Fill all fields correctly and verify yourself!');
     }
 
-    res.send('<script>alert("Login successful."); window.location.href = "/welcome";</script>');
+    // Sprawdzenie użytkownika w bazie danych
+    const user = await User.findOne({ username });
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).send('Invalid credentials.');
+    }
+
+    // Ustawienie identyfikatora użytkownika w sesji
+    req.session.userId = user._id;
+
+    // Przekierowanie na stronę profilu z powiadomieniem o udanym logowaniu
+    res.redirect('/profile.html?login-successful=true');
   } catch (err) {
     console.error(err);
     res.status(500).send('Login error.');
   }
 });
 
-// Welcome Page
-app.get('/welcome', (req, res) => {
-  res.send('Welcome! You have been successfully logged in.');
+// Trasa do danych profilowych
+app.get('/profile.html', (req, res) => {
+  // Pobranie parametru z adresu URL
+  const loginSuccessful = req.query['login-successful'];
+
+  // Wyświetlenie powiadomienia na stronie
+  res.sendFile(path.join(__dirname, 'Profile.html'));
 });
 
-// 404 - Not Found
+// Obsługa danych profilowych
+app.get('/profile-data', async (req, res) => {
+  try {
+    // Sprawdzenie, czy użytkownik jest zalogowany
+    const userId = req.session.userId;
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    // Pobranie danych użytkownika na podstawie identyfikatora z sesji
+    const user = await User.findById(userId);
+
+    // Sprawdzenie, czy użytkownik istnieje w bazie danych
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Zwrócenie danych użytkownika
+    const userData = {
+      username: user.username,
+      email: user.email,
+    };
+
+    res.json(userData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error fetching user data.' });
+  }
+});
+
+// Obsługa 404 - Nie znaleziono
 app.use((req, res) => {
   res.status(404).send('404 - Not Found');
 });
 
+// Nasłuchiwanie na określonym porcie
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });

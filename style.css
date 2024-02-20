@@ -1396,7 +1396,6 @@ a:-webkit-any-link {
 
 
 
-
 @media screen and (min-width: 768px) {
     #contactIcon {
         display: none; 
@@ -1446,6 +1445,12 @@ a:-webkit-any-link {
         cursor: pointer;
     }
 }
+#registrationSuccessMessage {
+    font-size: 18px; 
+    color: magenta; 
+    text-align: center; 
+    margin-top: 10px; 
+  }
 
 
 @media screen and (max-width: 767px) {

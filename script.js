@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function handleFormSubmit(event, formId) {
     var form = document.getElementById(formId);
-    
+
     if (!form) {
         console.error('Form not found:', formId);
         return;
@@ -80,7 +80,6 @@ function handleFormSubmit(event, formId) {
         return;
     }
 
-    // Generalized form fields selection
     var name = form.querySelector('[name="name"]').value;
     var surname = form.querySelector('[name="surname"]').value;
     var email = form.querySelector('[name="email"]').value;
@@ -89,7 +88,6 @@ function handleFormSubmit(event, formId) {
     var username = form.querySelector('[name="username"]').value;
     var password = form.querySelector('[name="password"]').value;
 
-    // Generalized validation based on the form
     if (formId === 'myForm' && (!name || !surname || !email || !department || !message)) {
         alert("You did something wrong. Fill all fields correctly and verify yourself!");
         event.preventDefault();
@@ -106,23 +104,23 @@ function handleFormSubmit(event, formId) {
             method: 'POST',
             body: formData
         })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var myForm = document.getElementById('myForm');
     var signForm = document.getElementById('signform');
     var loginForm = document.getElementById('login');
 
     if (myForm) {
-        myForm.addEventListener('submit', function(event) {
+        myForm.addEventListener('submit', function (event) {
             handleFormSubmit(event, 'myForm');
         });
     } else {
@@ -130,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (signForm) {
-        signForm.addEventListener('submit', function(event) {
+        signForm.addEventListener('submit', function (event) {
             handleFormSubmit(event, 'signform');
         });
     } else {
@@ -138,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (loginForm) {
-        loginForm.addEventListener('submit', function(event) {
+        loginForm.addEventListener('submit', function (event) {
             handleFormSubmit(event, 'login');
         });
     } else {
