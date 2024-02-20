@@ -28,6 +28,8 @@
                 <li><a class="active" href="contact.html">Contact us</a></li>
                 <li id="lg-bag"><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
                 <a href="#" id="close"><i class="fas fa-close"></i></a>
+                <li><a href="SignIn.html">Sign In</a></li>
+                <li><a href="LogIn.html">Login</a></li>
             </ul>
         </div>
         <div id="mobile">
@@ -85,7 +87,7 @@
                 </div>
                 <div id="contactFormContainer">
                     <span class="close mobile-only" onclick="closeForm()">X</span>
-                    <form action="https://formspree.io/f/mjvnykjl" method="post" id="myForm" onsubmit="handleFormSubmit(event)">
+                    <form action="https://formspree.io/f/mjvnykjl" method="post" id="myForm" onsubmit="handleFormSubmit(event, 'myForm')">
                         <label>
                             <p>Name</p>
                             <input type="text" name="name" required>

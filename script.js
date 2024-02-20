@@ -64,39 +64,87 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 });
 
+function handleFormSubmit(event, formId) {
+    var form = document.getElementById(formId);
+    
+    if (!form) {
+        console.error('Form not found:', formId);
+        return;
+    }
 
-function handleFormSubmit(event) {
     var response = grecaptcha.getResponse();
 
-    var name = document.getElementsByName("name")[0].value;
-    var surname = document.getElementsByName("surname")[0].value;
-    var email = document.getElementsByName("email")[0].value;
-    var department = document.getElementsByName("department")[0].value;
-    var message = document.getElementsByName("message")[0].value;
+    if (response.length === 0) {
+        alert("Please verify yourself using reCAPTCHA!");
+        event.preventDefault();
+        return;
+    }
 
-    if (response.length === 0 || !name || !surname || !email || !department || !message) {
-        alert("You did something wrong. Fill all fields correctly and verify yourself!.");
+    // Generalized form fields selection
+    var name = form.querySelector('[name="name"]').value;
+    var surname = form.querySelector('[name="surname"]').value;
+    var email = form.querySelector('[name="email"]').value;
+    var department = form.querySelector('[name="department"]').value;
+    var message = form.querySelector('[name="message"]').value;
+    var username = form.querySelector('[name="username"]').value;
+    var password = form.querySelector('[name="password"]').value;
+
+    // Generalized validation based on the form
+    if (formId === 'myForm' && (!name || !surname || !email || !department || !message)) {
+        alert("You did something wrong. Fill all fields correctly and verify yourself!");
+        event.preventDefault();
+    } else if (formId === 'signform' && (!username || !password || !email)) {
+        alert("You did something wrong. Fill all fields correctly and verify yourself!");
+        event.preventDefault();
+    } else if (formId === 'login' && (!username || !password)) {
+        alert("You did something wrong. Fill all fields correctly and verify yourself!");
         event.preventDefault();
     } else {
-        var myForm = document.getElementById('myForm');
-
-
-        var formData = new FormData(myForm);
+        var formData = new FormData(form);
 
         fetch('https://formspree.io/f/mjvnykjl', {
             method: 'POST',
             body: formData
         })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var myForm = document.getElementById('myForm');
+    var signForm = document.getElementById('signform');
+    var loginForm = document.getElementById('login');
+
+    if (myForm) {
+        myForm.addEventListener('submit', function(event) {
+            handleFormSubmit(event, 'myForm');
+        });
+    } else {
+        console.error('myForm not found.');
+    }
+
+    if (signForm) {
+        signForm.addEventListener('submit', function(event) {
+            handleFormSubmit(event, 'signform');
+        });
+    } else {
+        console.error('signform not found.');
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            handleFormSubmit(event, 'login');
+        });
+    } else {
+        console.error('login not found.');
+    }
+});
 
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
