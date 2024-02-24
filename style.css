@@ -1394,6 +1394,49 @@ a:-webkit-any-link {
     text-decoration: underline;
 }
 
+#admin-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  #admin-form h3 {
+    text-align: center;
+    color: #c73db4;
+  }
+  
+  #add-product-form {
+    display: grid;
+    gap: 10px;
+  }
+  
+  #add-product-form label {
+    font-weight: bold;
+  }
+  
+  #add-product-form input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  #add-product-form button {
+    background-color: #c73db4;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #add-product-form button:hover {
+    background-color: #ffffff;
+    color: #c73db4;
+  }
+
 
 
 @media screen and (min-width: 768px) {

@@ -180,3 +180,74 @@ if (formState === "open") {
 } else {
     $("#contactFormContainer").hide();
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const addProductForm = document.getElementById('add-product-form');
+
+    addProductForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Pobierz dane z formularza
+        const formData = new FormData(addProductForm);
+
+        // Wyślij dane do serwera za pomocą AJAX lub użyj Fetch API
+        fetch('add_product.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Obsłuż odpowiedź od serwera (np. wyświetl komunikat, odśwież stronę itp.)
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+
+function displayProduct(productData) {
+    const productsContainer = document.getElementById('products-container');
+
+    const productDiv = document.createElement('div');
+    productDiv.classList.add('pro');
+    function displayProduct(productData) {
+        const productsContainer = document.getElementById('products-container');
+    
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('pro');
+    
+        // Utwórz elementy do wyświetlenia informacji o produkcie (zdjęcie, nazwa, cena itp.)
+    
+        // Tworzenie elementu zdjęcia
+        const productImage = document.createElement('img');
+        productImage.src = productData.imageUrl; // Zakładam, że imageUrl to klucz w obiekcie productData zawierający ścieżkę do obrazka
+        productImage.alt = productData.name; // Zakładam, że name to klucz w obiekcie productData zawierający nazwę produktu
+    
+        // Tworzenie elementu nazwy
+        const productName = document.createElement('span');
+        productName.textContent = productData.name; // Zakładam, że name to klucz w obiekcie productData zawierający nazwę produktu
+    
+        // Tworzenie elementu ceny
+        const productPrice = document.createElement('div');
+        productPrice.classList.add('product-price');
+        const priceHeading = document.createElement('h4');
+        priceHeading.textContent = `$${productData.price.toFixed(2)}`; // Zakładam, że price to klucz w obiekcie productData zawierający cenę produktu
+        productPrice.appendChild(priceHeading);
+    
+        // Tworzenie elementu przycisku "Dodaj do koszyka"
+        const addToCartButton = document.createElement('a');
+        addToCartButton.href = '#'; // Tutaj możesz dodać link do odpowiedniego endpointu lub funkcji obsługującej dodawanie do koszyka
+        addToCartButton.innerHTML = '<i class="fas fa-shopping-cart cart"></i>';
+    
+        // Dodaj stworzone elementy do div produktu
+        productDiv.appendChild(productImage);
+        productDiv.appendChild(productName);
+        productDiv.appendChild(productPrice);
+        productDiv.appendChild(addToCartButton);
+    
+        // Dodaj div produktu do kontenera na stronie
+        productsContainer.appendChild(productDiv);
+    }
+    productsContainer.appendChild(productDiv);
+}
