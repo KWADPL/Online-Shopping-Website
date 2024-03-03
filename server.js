@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const moment = require('moment-timezone');
 const PORT = 8080;
 
 // Konfiguracja
@@ -39,6 +40,12 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.get('/server-time', (req, res) => {
+  const serverTime = moment().tz('Europe/Warsaw').format(); // Format the time in Europe/Warsaw time zone
+  res.json({ serverTime });
+});
+
 
     mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -110,42 +117,45 @@ app.use((req, res, next) => {
     app.post('/login', async (req, res) => {
       try {
         const { username, password, gRecaptchaResponse } = req.body;
-
+    
         // Weryfikacja reCAPTCHA
         const recaptchaSecretKey = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
         const recaptchaVerificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${gRecaptchaResponse}`;
-
+    
         const recaptchaResponse = await axios.post(recaptchaVerificationURL);
         const recaptchaData = recaptchaResponse.data;
-
+    
         if (!recaptchaData.success) {
           return res.status(400).send('reCAPTCHA verification failed. Fill all fields correctly and verify yourself!');
         }
-
+    
         // Sprawdzenie użytkownika w bazie danych
         const user = await User.findOne({ username });
-
+    
         if (!user || !(await bcrypt.compare(password, user.password))) {
           return res.status(401).send('Invalid credentials.');
         }
-
+    
         if (user.role !== 'admin') {
-
-          // Ustawienie identyfikatora użytkownika w sesji
-          req.session.userId = user._id;
-          req.session.lastActivityTime = Date.now();
-          req.session.cookie.expires = new Date(Date.now() + 20 * 60 * 1000); // Ustawia czas wygaśnięcia na 20 minut
+          // Sprawdzenie, czy przekierowanie już zostało wykonane
+          if (!res.headersSent) {
+            // Ustawienie identyfikatora użytkownika w sesji
+            req.session.userId = user._id;
+            req.session.lastActivityTime = Date.now();
+            req.session.cookie.maxAge = 20 * 60 * 1000; // Ustawia czas wygaśnięcia na 20 minut
+            res.redirect('/profile.html?login-successful=true');
+          }
+        } else {
+          // Przekierowanie na stronę profilu z powiadomieniem o udanym logowaniu
           res.redirect('/profile.html?login-successful=true');
-
         }
-        // Przekierowanie na stronę profilu z powiadomieniem o udanym logowaniu
-        res.redirect('/profile.html?login-successful=true');
       } catch (err) {
         console.error(err);
         res.status(500).send('Login error.');
       }
     });
-
+    
+    
     // Trasa do danych profilowych
     app.get('/profile.html', (req, res) => {
       // Pobranie parametru z adresu URL

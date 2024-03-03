@@ -18,11 +18,10 @@ async function fetchProfileData() {
 
     } catch (error) {
         console.error('Error fetching profile data:', error.message);
+        // Dodaj obsługę błędu - na przykład przekieruj użytkownika na stronę logowania
+        redirectToLoginPage();
     }
 }
-
-document.addEventListener('DOMContentLoaded', fetchProfileData);
-
 
 async function getServerTime() {
     const response = await fetch('/server-time');
@@ -49,35 +48,80 @@ function updateSessionTimer() {
             );
 
             // Ustal czas wygaśnięcia sesji
-            const expirationTime = new Date(sessionStartTime.getTime() + sessionTimeout);
+            const expirationTime = new Date(
+                sessionStartTime.getTime() + sessionTimeout
+            );
 
-            // Oblicz czas pozostały do wygaśnięcia sesji, ale od serverTime
-            const timeRemaining = expirationTime - serverTime;
+            // Oblicz czas pozostały do wygaśnięcia sesji, ale od currentTime
+            const timeRemaining = expirationTime - currentTime;
 
             // Wyświetl czas pozostały do końca sesji
             const minutesRemaining = Math.floor(timeRemaining / (60 * 1000));
-            const secondsRemaining = Math.floor((timeRemaining % (60 * 1000)) / 1000);
+            const secondsRemaining = Math.floor(
+                (timeRemaining % (60 * 1000)) / 1000
+            );
 
             document.getElementById('session-timer').textContent = `Time to log out: ${minutesRemaining} minutes and ${secondsRemaining} seconds`;
 
             // Ustaw czas ostatniej aktywności w sesji na bieżący czas
-            sessionStorage.lastActivityTime = serverTime;
+            sessionStorage.lastActivityTime = currentTime;
 
             // Ustaw czas początkowy sesji na bieżący czas, jeśli to pierwszy raz
             if (!sessionStorage.sessionStartTime) {
-                sessionStorage.sessionStartTime = serverTime;
+                sessionStorage.sessionStartTime = currentTime;
             }
 
             // Sprawdź, czy sesja wygasła
             if (timeRemaining <= 0) {
                 // Sesja wygasła, przekieruj na stronę logowania
-                window.location.href = '/login?alert=session-expired';
+                logoutUser();
             }
         } catch (error) {
             console.error('Session time update error:', error.message);
         }
     }, 1000);
 }
-  document.addEventListener('DOMContentLoaded', () => {
+
+function checkIfLoggedIn() {
+    // Dodaj kod sprawdzający, czy użytkownik jest zalogowany
+    // Zwróć true, jeśli zalogowany, false w przeciwnym razie
+    // Przykładowa implementacja:
+    // return sessionStorage.getItem('isLoggedIn') === 'true';
+    return true; // Założenie tymczasowe
+}
+
+function redirectToLoginPage() {
+    // Przekieruj użytkownika na stronę logowania
+    window.location.href = '/login';
+}
+
+function logoutUser() {
+    // Wyczyść dane sesji i przekieruj na stronę logowania
+    sessionStorage.removeItem('sessionStartTime');
+    sessionStorage.removeItem('lastActivityTime');
+    window.location.href = '/login?alert=session-expired';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     updateSessionTimer();
-  });
+
+    // Dodaj event listener do przycisku wylogowywania (o ile taki przycisk istnieje)
+    const logoutButton = document.getElementById('logout-link');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', logoutUser);
+    }
+
+    // Sprawdź, czy użytkownik jest zalogowany i czy został przekierowany na stronę po udanym logowaniu
+    const isLoggedIn = checkIfLoggedIn(); // Funkcja do sprawdzania, czy użytkownik jest zalogowany
+    const loginSuccessful = new URLSearchParams(window.location.search).get('login-successful');
+
+    if (loginSuccessful === 'true' && isLoggedIn) {
+        // Ustaw nową sesję po udanym zalogowaniu
+        sessionStorage.clear();
+        sessionStorage.sessionStartTime = new Date();
+    } else if (loginSuccessful === 'true' && !isLoggedIn) {
+        // Błąd - użytkownik nie jest zalogowany, ale próbuje uzyskać dostęp do strony profilowej po udanym zalogowaniu
+        console.error('User not logged in. Unable to create a new session after successful login.');
+        redirectToLoginPage();
+    }
+});
